@@ -25,46 +25,56 @@ print ('Hash='+md5)
 ### POST Function ###
 
 ### 1.Search Users ###
-postStatement='/v1/user?_method=GET'
-pload={'random':randomKey,'md5':md5,
-       'search_type':'user',
-       'search_value':'spider'
-       }
+##postStatement='/v1/user?_method=GET'
+##pload={'random':randomKey,'md5':md5,
+##       'search_type':'user',
+##       'search_value':'spiderman'
+##       }
 
 ### 2.Add Users ###
-postStatement='/v1/user'
-pload={'random':randomKey,'md5':md5,
-       'name': 'black_widow',
-       'desc': 'Added by RestAPI',
-       'father_path': '/guest-selfregister',
-       'expire_time': expireDate,
-       'extend':{
-           'custom_cfg': {
-               'Full Name': 'Natasha Romanoff', 
-               'Sex': 'Female',
-               'Team': 'Avengers'
-               },
-           'self_pass': {
-               'enable': 'true',
-               'password': '1234',
-               'modify_once': 'false'
-               }
-           }
-       }
+##postStatement='/v1/user'
+##pload={'random':randomKey,'md5':md5,
+##       'name': 'spiderman', #username
+##       'desc': 'Added by RestAPI', #description
+##       'father_path': '/guest', #group
+##       'expire_time': expireDate, #expire date&time
+##       'extend':{
+##           'custom_cfg': { #additional user attribute
+##               'Full Name': 'Peter Parker', 
+##               'Sex': 'Male',
+##               },
+##           'self_pass': {
+##               'enable': 'true', #enable local password
+##               'password': '1234', #local password
+##               'modify_once': 'false'
+##               }
+##           }
+##       }
 
 ### 3. Edit Users ###
 ##postStatement='/v1/user?_method=PUT'
 ##pload={'random':randomKey,'md5':md5,
-##    'name': 'hulk',
+##    'name': 'hulk', #username
 ##    'data': {
-##        'desc': 'Edited by RestfulAPI',
-##        'expire_time': '2021-01-10 00:00:00',
+##        'desc': 'Edited by RestfulAPI', #description
+##        'expire_time': '2020-08-11 14:40', #expire date&time
 ##        'extend': {
-##            'father_path': '/avenger',
+##            'father_path': '/', #group
 ##            }
 ##        }
 ##    }
+
+
+### 4. Put User to online SSO ###
+postStatement='/v1/online-users'
+pload={'random':randomKey,'md5':md5,
+       "ip": "172.16.10.101",
+       "name": "spiderman",
+       "group": "/post",
+       }
+       
    
+
 #####Make POST Request to IAM API###########
 postMsg = ('http://'+iamIP+':'+iamPort+postStatement)
 print ('=====POST Request====')
